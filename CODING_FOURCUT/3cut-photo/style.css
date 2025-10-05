@@ -1,0 +1,535 @@
+
+/* 폰트 추가 */
+@font-face {
+  font-family: "memomentKkukkkuk";
+  src: url("assets/fonts/memomentKkukkkuk.ttf") format("truetype");
+}
+
+/* 기본 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "memomentKkukkkuk", sans-serif;
+  background: url("assets/images/background.png") center/cover no-repeat;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+
+.screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 1;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.overlay-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: none;
+}
+
+.overlay-screen.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* 시작 화면 컨테이너 */
+.start-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 카메라 컨테이너 */
+.camera-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-align: center;
+}
+
+.overlay h1 {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 4rem;
+  margin-bottom: 3rem;
+  color: #fc66a7;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+  font-weight: bold;
+}
+
+/* 버튼 스타일 */
+.primary-btn {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 40px;
+  color: #fdd159;
+  background: rgba(255, 255, 255, 0.9);
+  border: 3px solid #fdd159;
+  border-radius: 10px;
+  padding: 15px 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  position: absolute;
+  bottom: 300px;
+}
+
+.primary-btn:hover:not(:disabled) {
+  background: #ffe190ff;
+  color: white;
+  transform: scale(1.05);
+}
+
+.primary-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.ok-btn {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 30px;
+  color: #fdd159;
+  background: rgba(255, 255, 255, 0.9);
+  border: 3px solid #fdd159;
+  border-radius: 10px;
+  padding: 10px 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  position: absolute;
+  bottom: 20px;
+  left: 310px;
+
+}
+
+.ok-btn:hover:not(:disabled) {
+  background: #ffe190ff;
+  color: white;
+  transform: scale(1.05);
+}
+
+.secondary-btn {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 30px;
+  color: #fdd159;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #fdd159;
+  border-radius: 10px;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.secondary-btn:hover {
+  background: #ffe190ff;
+  color: white;
+  transform: scale(1.02);
+}
+
+.remake-btn {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 25px;
+  color: #fdd159;
+  background: rgba(255, 255, 255, 0.9);
+  border: 3px solid #fdd159;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  position: absolute;
+  bottom: 5px;
+  left: 680px;
+}
+
+.remake-btn:hover:not(:disabled) {
+  background: #ffe190ff;
+  color: white;
+  transform: scale(1.05);
+}
+
+.countdown-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  text-align: center;
+}
+
+#countdown-number {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 8rem;
+  margin-bottom: 1rem;
+  color: #ffe190ff;
+  text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.8);
+  font-weight: bold;
+}
+
+.countdown-message p {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+.shooting-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  padding: 2rem;
+}
+
+.progress-info {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1.5rem;
+  border-radius: 15px;
+}
+
+#shot-counter {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+#next-shot-countdown {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  color: #ffe190ff;
+  font-weight: bold;
+}
+
+.progress-info p {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 1rem;
+  opacity: 0.8;
+  color: white;
+}
+
+.flash-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s ease;
+}
+
+.flash-effect.active {
+  opacity: 0.8;
+}
+
+.selection-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: rgba(248, 248, 248, 0.4);
+}
+
+.threecut-layout {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.6);
+  border-right: 1px solid #e0e0e0;
+}
+
+.threecut-layout h2 {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #ffe190ff;
+}
+
+.preview-container {
+  margin-bottom: 2rem;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+#preview-canvas {
+  display: block;
+  width: 400px;
+  height: 533px;
+}
+
+.threecut-slot {
+  background: #f0f0f0;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+}
+
+.threecut-slot.filled {
+  border: 2px solid #007aff;
+  background: none;
+}
+
+.threecut-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slot-number {
+  font-size: 2rem;
+}
+
+.threecut-slot.filled .slot-number {
+  display: none;
+}
+
+.selection-info {
+  text-align: center;
+}
+
+#selection-count {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #ffe190ff;
+}
+
+.photo-gallery {
+  flex: 1;
+  padding: 2rem;
+  background: rgba(248, 248, 248, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.photo-gallery h3 {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #fdd159;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.photo-item {
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+  position: relative;
+  display: inline-block;
+}
+
+.photo-item:hover {
+  transform: scale(1.05);
+}
+
+.photo-item.selected {
+  border-color: blue;
+  transform: scale(1.02);
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+.photo-item .selection-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: blue;
+  color: white;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.photo-gallery > .secondary-btn {
+  display: block;
+  margin: 0 auto;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+}
+
+.result-container h2 {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #fdd159;
+}
+
+.final-threecut {
+  margin-bottom: 2rem;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+#final-canvas {
+  max-width: 400px;
+  height: auto;
+  display: block;
+}
+
+.result-actions {
+  text-align: center;
+}
+
+#save-message {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #fdd159;
+}
+
+/* \) Tt */
+.loading-content {
+  text-align: center;
+  color: white;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#loading-message {
+  font-family: "memomentKkukkkuk", sans-serif;
+  font-size: 1.2rem;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .selection-container {
+    flex-direction: column;
+  }
+
+  .threecut-layout {
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 400px;
+  }
+
+  .threecut-grid {
+    width: 250px;
+  }
+}
